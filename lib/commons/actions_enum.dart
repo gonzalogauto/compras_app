@@ -1,0 +1,1 @@
+enum AppAction { edit, remove }

@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Mis Compras App', style: GoogleFonts.lato()),
-          centerTitle: true,
+          elevation: 0,
         ),
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),

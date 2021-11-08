@@ -1,4 +1,8 @@
 import 'package:compras_app/bloc/items_bloc.dart';
+import 'package:compras_app/commons/actions_enum.dart';
+import 'package:compras_app/commons/actions_enum.dart';
+import 'package:compras_app/commons/actions_enum.dart';
+import 'package:compras_app/commons/actions_enum.dart';
 import 'package:compras_app/database/database.dart';
 import 'package:compras_app/singletons/database_singleton.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +21,7 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ItemsBloc(),
+      create: (_) => ItemsBloc(),
       child: DetailPageView(
         args: args,
       ),
@@ -41,7 +45,11 @@ class _DetailPageViewState extends State<DetailPageView> {
   Future<void> _share(String listName) async {
     var text = '*$listName*:\n';
     for (var item in data) {
-      text += '• ${item.name}.\n';
+      if (item.isChecked) {
+        text += '• ~${item.name}~.\n';
+      } else {
+        text += '• ${item.name}.\n';
+      }
     }
     await Share.share(text);
   }
@@ -71,41 +79,99 @@ class _DetailPageViewState extends State<DetailPageView> {
                 child: CircularProgressIndicator(),
               );
             } else {
+              data.clear();
+              data.addAll(snapshot.data!);
               if (snapshot.data!.isNotEmpty) {
-                data.clear();
-                data.addAll(snapshot.data!);
                 return ListView.separated(
                   itemCount: snapshot.data!.length,
                   separatorBuilder: (context, index) => const Divider(),
                   itemBuilder: (context, index) {
-                    return Dismissible(
-                        key: ValueKey(snapshot.data![index].id),
-                        background: Container(
-                          color: Colors.red,
-                        ),
-                        onDismissed: (direction) {
-                          context.read<ItemsBloc>().add(
-                              DeleteItemEvent(id: snapshot.data![index].id));
+                    return ListTile(
+                      leading: Checkbox(
+                        side: BorderSide(color: Colors.grey.shade500, width: 1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                        value: snapshot.data![index].isChecked,
+                        onChanged: (value) {
+                          context.read<ItemsBloc>().add(UpdateItemEvent(
+                              item: snapshot.data![index]
+                                  .copyWith(isChecked: value)));
                         },
-                        child: ListTile(
-                          leading: Checkbox(
-                            side: BorderSide(
-                                color: Colors.grey.shade500, width: 1),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            value: snapshot.data![index].isChecked,
-                            onChanged: (value) {
-                              context.read<ItemsBloc>().add(UpdateItemEvent(
-                                  item: snapshot.data![index]
-                                      .copyWith(isChecked: value)));
-                            },
-                          ),
-                          title: Text(snapshot.data![index].name!,
-                              style: snapshot.data![index].isChecked
-                                  ? GoogleFonts.lato(
-                                      decoration: TextDecoration.lineThrough)
-                                  : GoogleFonts.lato()),
-                        ));
+                      ),
+                      title: Text(snapshot.data![index].name!,
+                          style: snapshot.data![index].isChecked
+                              ? GoogleFonts.lato(
+                                  decoration: TextDecoration.lineThrough)
+                              : GoogleFonts.lato()),
+                      trailing: PopupMenuButton<AppAction>(
+                          onSelected: (item) async {
+                            switch (item) {
+                              case AppAction.edit:
+                                break;
+                              case AppAction.remove:
+                                await showDialog(
+                                    context: context,
+                                    builder: (context) => Dialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                const Text(
+                                                  '¿Desea borrar el item?',
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                const SizedBox(height: 20),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context),
+                                                        child:
+                                                            const Text('NO')),
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          context
+                                                              .read<ItemsBloc>()
+                                                              .add(DeleteItemEvent(
+                                                                  id: snapshot
+                                                                      .data![
+                                                                          index]
+                                                                      .id));
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: const Text('SI'))
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ));
+                                break;
+                              default:
+                            }
+                          },
+                          itemBuilder: (context) => [
+                                // const PopupMenuItem(
+                                //   child: Text('Editar'),
+                                //   value: AppAction.edit,
+                                // ),
+                                const PopupMenuItem(
+                                  child: Text('Borrar'),
+                                  value: AppAction.remove,
+                                ),
+                              ]),
+                    );
                   },
                 );
               } else {

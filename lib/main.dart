@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'bloc/items_bloc.dart';
 import 'bloc/shopping_list_bloc.dart';
 import 'cubit/theme_cubit.dart';
 import 'screens/my_lists.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => ThemeCubit()),
-          BlocProvider(create: (context) => ShoppingListBloc())
+          BlocProvider(create: (context) => ShoppingListBloc()),
+          BlocProvider(create: (context) => ItemsBloc())
         ],
         child: BlocBuilder<ThemeCubit, ThemeData>(
           builder: (_, theme) {
