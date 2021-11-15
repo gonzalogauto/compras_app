@@ -1,5 +1,7 @@
 import 'package:compras_app/commons/actions_enum.dart';
 import 'package:compras_app/singletons/database_singleton.dart';
+import 'package:compras_app/widgets/delete_dialog.dart';
+import 'package:compras_app/widgets/edit_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:compras_app/bloc/shopping_list_bloc.dart';
@@ -58,77 +60,31 @@ class _MyListsPageState extends State<MyListsPage> {
                           ),
                           subtitle: Text(
                               DateFormat('dd/MM/yyyy')
-                                  .format(snapshot.data![index].createdAt),
+                                  .format(snapshot.data![index].createdAt!),
                               style: GoogleFonts.lato()),
                           trailing: PopupMenuButton<AppAction>(
                               onSelected: (item) async {
                                 switch (item) {
                                   case AppAction.edit:
-                                    break;
-                                  case AppAction.remove:
-                                    await showDialog(
+                                    return await showDialog(
                                         context: context,
-                                        builder: (context) => Dialog(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(15.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text(
-                                                      '¿Desea borrar la lista "${snapshot.data![index].name!}"?',
-                                                      style: const TextStyle(
-                                                          fontSize: 20),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                    const SizedBox(height: 20),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    context),
-                                                            child: const Text(
-                                                                'NO')),
-                                                        ElevatedButton(
-                                                            onPressed: () {
-                                                              context
-                                                                  .read<
-                                                                      ShoppingListBloc>()
-                                                                  .add(ShoppingListDelete(
-                                                                      id: snapshot
-                                                                          .data![
-                                                                              index]
-                                                                          .id));
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: const Text(
-                                                                'SI'))
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
+                                        builder: (context) => EditListDialog(
+                                              listData: snapshot.data![index],
                                             ));
-                                    break;
+                                  case AppAction.remove:
+                                    return await showDialog(
+                                        context: context,
+                                        builder: (context) => DeleteListDialog(
+                                              listData: snapshot.data![index],
+                                            ));
                                   default:
                                 }
                               },
                               itemBuilder: (context) => [
-                                    // const PopupMenuItem(
-                                    //   child: Text('Editar'),
-                                    //   value: AppAction.edit,
-                                    // ),
+                                    const PopupMenuItem(
+                                      child: Text('Editar'),
+                                      value: AppAction.edit,
+                                    ),
                                     const PopupMenuItem(
                                       child: Text('Borrar'),
                                       value: AppAction.remove,

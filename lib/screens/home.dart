@@ -22,9 +22,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Mis Compras App', style: GoogleFonts.lato()),
+          title: Text('Mis Compras App',
+              style: GoogleFonts.lato(
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.bold)),
           elevation: 0,
+          centerTitle: true,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
+        
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),
           allowImplicitScrolling: false,
@@ -70,8 +76,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                       TextButton(
                                           onPressed: () =>
                                               Navigator.pop(context),
-                                          child: const Text('CANCELAR')),
+                                          child: Text(
+                                            'CANCELAR',
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                          )),
                                       ElevatedButton(
+                                        style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          )),
                                           onPressed: () {
                                             Navigator.pop(context,
                                                 _textEditingController.text);

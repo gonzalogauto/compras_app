@@ -16,7 +16,10 @@ class ShoppingListCreate extends ShoppingListEvent {
   ShoppingListCreate({required this.name});
 }
 
-class ShoppingListUpdate extends ShoppingListEvent {}
+class ShoppingListUpdate extends ShoppingListEvent {
+  final Insertable<ShoppingListTableData> report;
+  ShoppingListUpdate({required this.report});
+}
 
 class ShoppingListDelete extends ShoppingListEvent {
   final int id;

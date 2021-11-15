@@ -6,6 +6,7 @@ import 'package:compras_app/models/shopping_list.dart';
 import 'package:compras_app/singletons/database_singleton.dart';
 import 'package:meta/meta.dart';
 import 'package:moor/moor.dart' as moor;
+import 'package:moor/moor.dart';
 
 part 'shopping_list_event.dart';
 part 'shopping_list_state.dart';
@@ -23,8 +24,10 @@ class ShoppingListBloc extends Bloc<ShoppingListEvent, ShoppingListState> {
       final data = await dao.getShoppingList();
       emit(state.copyWith(status: Status.loaded, data: data));
     });
-    on<ShoppingListUpdate>((event, emit) {
-      emit(state.copyWith(status: Status.loading));
+    on<ShoppingListUpdate>((event, emit) async {
+      await dao.updateList(event.report);
+      final data = await dao.getShoppingList();
+      emit(state.copyWith(status: Status.loaded, data: data));
     });
     on<ShoppingListDelete>((event, emit) async {
       await dao.deleteShoppingList(event.id);

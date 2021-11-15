@@ -211,9 +211,22 @@ class _DetailPageViewState extends State<DetailPageView> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               TextButton(
+                                
                                   onPressed: () => Navigator.pop(context),
-                                  child: const Text('CANCELAR')),
+                                  child: Text(
+                                    'CANCELAR',
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    ),
+                                  )),
                               ElevatedButton(
+                                style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                    Theme.of(context).colorScheme.secondary,
+                                  )),
                                   onPressed: () {
                                     Navigator.pop(
                                         context, _textEditingController.text);
