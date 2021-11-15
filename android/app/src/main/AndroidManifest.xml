@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.compras_app">
+    package="com.gdeveloper.compras_app">
    <application
         android:label="compras_app"
         android:icon="@mipmap/ic_launcher">

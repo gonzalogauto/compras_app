@@ -1,4 +1,4 @@
-package com.example.compras_app
+package com.gdeveloper.compras_app
 
 import io.flutter.embedding.android.FlutterActivity
 
