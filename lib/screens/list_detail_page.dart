@@ -60,14 +60,25 @@ class _DetailPageViewState extends State<DetailPageView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(args.name, style: GoogleFonts.lato()),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+        title: Text(args.name,
+            style: GoogleFonts.lato(
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+        elevation: 0,
         centerTitle: true,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: [
           IconButton(
               onPressed: () => _share(
                     args.name,
                   ),
-              icon: const Icon(Icons.share))
+              icon: Icon(
+                Icons.share,
+                color: Theme.of(context).colorScheme.secondary,
+              ))
         ],
       ),
       body: StreamBuilder(
@@ -210,8 +221,7 @@ class _DetailPageViewState extends State<DetailPageView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              TextButton(
-                                
+                              TextButton(                                
                                   onPressed: () => Navigator.pop(context),
                                   child: Text(
                                     'CANCELAR',

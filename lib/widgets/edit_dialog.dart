@@ -47,9 +47,16 @@ class EditListDialog extends StatelessWidget {
                       },
                       child: Text(
                         'CANCELAR',
-                        style: GoogleFonts.lato(fontSize: 12),
+                        style: GoogleFonts.lato(
+                          fontSize: 12,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                       )),
                   ElevatedButton(
+                    style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.secondary,
+                      )),
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           context.read<ShoppingListBloc>().add(

@@ -27,8 +27,17 @@ class DeleteListDialog extends StatelessWidget {
               children: [
                 TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('NO')),
+                    child: Text(
+                      'NO',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    )),
                 ElevatedButton(
+                  style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                      Theme.of(context).colorScheme.secondary,
+                    )),
                     onPressed: () {
                       context
                           .read<ShoppingListBloc>()
