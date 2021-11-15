@@ -17,10 +17,13 @@ class ShoppingListDao extends DatabaseAccessor<AppDatabase>
     return result
         .map((e) => ShoppingList(
             id: e.id,
-            createdAt: e.createdAt,
+            createdAt: e.createdAt!,
             name: e.name ?? 'sin nombre',
             items: []))
         .toList();
+  }
+  Future updateList(Insertable<ShoppingListTableData> data) {
+    return update(shoppingListTable).replace(data);
   }
 
   Future<int> deleteShoppingList(int listId) async {

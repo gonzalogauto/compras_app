@@ -11,8 +11,8 @@ class ShoppingListTableData extends DataClass
     implements Insertable<ShoppingListTableData> {
   final int id;
   final String? name;
-  final DateTime createdAt;
-  ShoppingListTableData({required this.id, this.name, required this.createdAt});
+  final DateTime? createdAt;
+  ShoppingListTableData({required this.id, this.name, this.createdAt});
   factory ShoppingListTableData.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
@@ -23,7 +23,7 @@ class ShoppingListTableData extends DataClass
       name: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}name']),
       createdAt: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}created_at'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}created_at']),
     );
   }
   @override
@@ -33,7 +33,9 @@ class ShoppingListTableData extends DataClass
     if (!nullToAbsent || name != null) {
       map['name'] = Variable<String?>(name);
     }
-    map['created_at'] = Variable<DateTime>(createdAt);
+    if (!nullToAbsent || createdAt != null) {
+      map['created_at'] = Variable<DateTime?>(createdAt);
+    }
     return map;
   }
 
@@ -41,7 +43,9 @@ class ShoppingListTableData extends DataClass
     return ShoppingListTableCompanion(
       id: Value(id),
       name: name == null && nullToAbsent ? const Value.absent() : Value(name),
-      createdAt: Value(createdAt),
+      createdAt: createdAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(createdAt),
     );
   }
 
@@ -51,7 +55,7 @@ class ShoppingListTableData extends DataClass
     return ShoppingListTableData(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String?>(json['name']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      createdAt: serializer.fromJson<DateTime?>(json['createdAt']),
     );
   }
   @override
@@ -60,7 +64,7 @@ class ShoppingListTableData extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String?>(name),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'createdAt': serializer.toJson<DateTime?>(createdAt),
     };
   }
 
@@ -97,7 +101,7 @@ class ShoppingListTableCompanion
     extends UpdateCompanion<ShoppingListTableData> {
   final Value<int> id;
   final Value<String?> name;
-  final Value<DateTime> createdAt;
+  final Value<DateTime?> createdAt;
   const ShoppingListTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -106,12 +110,12 @@ class ShoppingListTableCompanion
   ShoppingListTableCompanion.insert({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
-    required DateTime createdAt,
-  }) : createdAt = Value(createdAt);
+    this.createdAt = const Value.absent(),
+  });
   static Insertable<ShoppingListTableData> custom({
     Expression<int>? id,
     Expression<String?>? name,
-    Expression<DateTime>? createdAt,
+    Expression<DateTime?>? createdAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -121,7 +125,7 @@ class ShoppingListTableCompanion
   }
 
   ShoppingListTableCompanion copyWith(
-      {Value<int>? id, Value<String?>? name, Value<DateTime>? createdAt}) {
+      {Value<int>? id, Value<String?>? name, Value<DateTime?>? createdAt}) {
     return ShoppingListTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -139,7 +143,7 @@ class ShoppingListTableCompanion
       map['name'] = Variable<String?>(name.value);
     }
     if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+      map['created_at'] = Variable<DateTime?>(createdAt.value);
     }
     return map;
   }
@@ -172,8 +176,8 @@ class $ShoppingListTableTable extends ShoppingListTable
       typeName: 'TEXT', requiredDuringInsert: false);
   final VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
   late final GeneratedColumn<DateTime?> createdAt = GeneratedColumn<DateTime?>(
-      'created_at', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      'created_at', aliasedName, true,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [id, name, createdAt];
   @override
@@ -196,8 +200,6 @@ class $ShoppingListTableTable extends ShoppingListTable
     if (data.containsKey('created_at')) {
       context.handle(_createdAtMeta,
           createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
-    } else if (isInserting) {
-      context.missing(_createdAtMeta);
     }
     return context;
   }
