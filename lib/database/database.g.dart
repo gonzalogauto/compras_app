@@ -221,12 +221,12 @@ class $ShoppingListTableTable extends ShoppingListTable
 class ItemTableData extends DataClass implements Insertable<ItemTableData> {
   final int id;
   final String? name;
-  final int shoppingListId;
+  final int? shoppingListId;
   final bool isChecked;
   ItemTableData(
       {required this.id,
       this.name,
-      required this.shoppingListId,
+      this.shoppingListId,
       required this.isChecked});
   factory ItemTableData.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
@@ -238,7 +238,7 @@ class ItemTableData extends DataClass implements Insertable<ItemTableData> {
       name: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}name']),
       shoppingListId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}shopping_list_id'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}shopping_list_id']),
       isChecked: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_checked'])!,
     );
@@ -250,7 +250,9 @@ class ItemTableData extends DataClass implements Insertable<ItemTableData> {
     if (!nullToAbsent || name != null) {
       map['name'] = Variable<String?>(name);
     }
-    map['shopping_list_id'] = Variable<int>(shoppingListId);
+    if (!nullToAbsent || shoppingListId != null) {
+      map['shopping_list_id'] = Variable<int?>(shoppingListId);
+    }
     map['is_checked'] = Variable<bool>(isChecked);
     return map;
   }
@@ -259,7 +261,9 @@ class ItemTableData extends DataClass implements Insertable<ItemTableData> {
     return ItemTableCompanion(
       id: Value(id),
       name: name == null && nullToAbsent ? const Value.absent() : Value(name),
-      shoppingListId: Value(shoppingListId),
+      shoppingListId: shoppingListId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(shoppingListId),
       isChecked: Value(isChecked),
     );
   }
@@ -270,7 +274,7 @@ class ItemTableData extends DataClass implements Insertable<ItemTableData> {
     return ItemTableData(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String?>(json['name']),
-      shoppingListId: serializer.fromJson<int>(json['shoppingListId']),
+      shoppingListId: serializer.fromJson<int?>(json['shoppingListId']),
       isChecked: serializer.fromJson<bool>(json['isChecked']),
     );
   }
@@ -280,7 +284,7 @@ class ItemTableData extends DataClass implements Insertable<ItemTableData> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String?>(name),
-      'shoppingListId': serializer.toJson<int>(shoppingListId),
+      'shoppingListId': serializer.toJson<int?>(shoppingListId),
       'isChecked': serializer.toJson<bool>(isChecked),
     };
   }
@@ -322,7 +326,7 @@ class ItemTableData extends DataClass implements Insertable<ItemTableData> {
 class ItemTableCompanion extends UpdateCompanion<ItemTableData> {
   final Value<int> id;
   final Value<String?> name;
-  final Value<int> shoppingListId;
+  final Value<int?> shoppingListId;
   final Value<bool> isChecked;
   const ItemTableCompanion({
     this.id = const Value.absent(),
@@ -333,13 +337,13 @@ class ItemTableCompanion extends UpdateCompanion<ItemTableData> {
   ItemTableCompanion.insert({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
-    required int shoppingListId,
+    this.shoppingListId = const Value.absent(),
     this.isChecked = const Value.absent(),
-  }) : shoppingListId = Value(shoppingListId);
+  });
   static Insertable<ItemTableData> custom({
     Expression<int>? id,
     Expression<String?>? name,
-    Expression<int>? shoppingListId,
+    Expression<int?>? shoppingListId,
     Expression<bool>? isChecked,
   }) {
     return RawValuesInsertable({
@@ -353,7 +357,7 @@ class ItemTableCompanion extends UpdateCompanion<ItemTableData> {
   ItemTableCompanion copyWith(
       {Value<int>? id,
       Value<String?>? name,
-      Value<int>? shoppingListId,
+      Value<int?>? shoppingListId,
       Value<bool>? isChecked}) {
     return ItemTableCompanion(
       id: id ?? this.id,
@@ -373,7 +377,7 @@ class ItemTableCompanion extends UpdateCompanion<ItemTableData> {
       map['name'] = Variable<String?>(name.value);
     }
     if (shoppingListId.present) {
-      map['shopping_list_id'] = Variable<int>(shoppingListId.value);
+      map['shopping_list_id'] = Variable<int?>(shoppingListId.value);
     }
     if (isChecked.present) {
       map['is_checked'] = Variable<bool>(isChecked.value);
@@ -411,8 +415,8 @@ class $ItemTableTable extends ItemTable
   final VerificationMeta _shoppingListIdMeta =
       const VerificationMeta('shoppingListId');
   late final GeneratedColumn<int?> shoppingListId = GeneratedColumn<int?>(
-      'shopping_list_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      'shopping_list_id', aliasedName, true,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _isCheckedMeta = const VerificationMeta('isChecked');
   late final GeneratedColumn<bool?> isChecked = GeneratedColumn<bool?>(
       'is_checked', aliasedName, false,
@@ -443,8 +447,6 @@ class $ItemTableTable extends ItemTable
           _shoppingListIdMeta,
           shoppingListId.isAcceptableOrUnknown(
               data['shopping_list_id']!, _shoppingListIdMeta));
-    } else if (isInserting) {
-      context.missing(_shoppingListIdMeta);
     }
     if (data.containsKey('is_checked')) {
       context.handle(_isCheckedMeta,

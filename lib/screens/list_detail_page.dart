@@ -5,6 +5,8 @@ import 'package:compras_app/commons/actions_enum.dart';
 import 'package:compras_app/commons/actions_enum.dart';
 import 'package:compras_app/database/database.dart';
 import 'package:compras_app/singletons/database_singleton.dart';
+import 'package:compras_app/widgets/delete_item_dialog.dart';
+import 'package:compras_app/widgets/edit_item_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -118,65 +120,23 @@ class _DetailPageViewState extends State<DetailPageView> {
                           onSelected: (item) async {
                             switch (item) {
                               case AppAction.edit:
-                                break;
-                              case AppAction.remove:
-                                await showDialog(
+                                return await showDialog(
                                     context: context,
-                                    builder: (context) => Dialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                const Text(
-                                                  '¿Desea borrar el item?',
-                                                  style:
-                                                      TextStyle(fontSize: 20),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                                const SizedBox(height: 20),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                context),
-                                                        child:
-                                                            const Text('NO')),
-                                                    ElevatedButton(
-                                                        onPressed: () {
-                                                          context
-                                                              .read<ItemsBloc>()
-                                                              .add(DeleteItemEvent(
-                                                                  id: snapshot
-                                                                      .data![
-                                                                          index]
-                                                                      .id));
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: const Text('SI'))
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ));
-                                break;
+                                    builder: (context) => EditItemDialog(
+                                        itemData: snapshot.data![index]));       
+                              case AppAction.remove:
+                                return await showDialog(
+                                    context: context,
+                                    builder: (context) => DeleteItemDialog(
+                                        itemData: snapshot.data![index]));                                
                               default:
                             }
                           },
                           itemBuilder: (context) => [
-                                // const PopupMenuItem(
-                                //   child: Text('Editar'),
-                                //   value: AppAction.edit,
-                                // ),
+                                const PopupMenuItem(
+                                  child: Text('Editar'),
+                                  value: AppAction.edit,
+                                ),
                                 const PopupMenuItem(
                                   child: Text('Borrar'),
                                   value: AppAction.remove,

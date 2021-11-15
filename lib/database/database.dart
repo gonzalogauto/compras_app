@@ -19,7 +19,7 @@ class AppDatabase extends _$AppDatabase {
             path: 'db.sqlite', logStatements: true));
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -27,6 +27,9 @@ class AppDatabase extends _$AppDatabase {
       onUpgrade: (m, from, to) async {
         if (from <= 1) {
           await m.alterTable(TableMigration(shoppingListTable));
+        }
+        if (from <= 2) {
+          await m.alterTable(TableMigration(itemTable));
         }
       });
 }

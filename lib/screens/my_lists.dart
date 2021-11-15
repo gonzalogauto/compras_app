@@ -1,7 +1,7 @@
 import 'package:compras_app/commons/actions_enum.dart';
 import 'package:compras_app/singletons/database_singleton.dart';
-import 'package:compras_app/widgets/delete_dialog.dart';
-import 'package:compras_app/widgets/edit_dialog.dart';
+import 'package:compras_app/widgets/delete_list_dialog.dart';
+import 'package:compras_app/widgets/edit_list_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:compras_app/bloc/shopping_list_bloc.dart';
