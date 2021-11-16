@@ -11,9 +11,11 @@ class EditItemDialog extends StatelessWidget {
   EditItemDialog({required this.itemData, Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
+    _nameController.text = itemData.name ?? '';
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
@@ -31,6 +33,7 @@ class EditItemDialog extends StatelessWidget {
               const SizedBox(height: 20),
               TextFormField(
                   controller: _nameController,
+                  initialValue: 'sadas',
                   validator: (value) =>
                       value != '' ? null : 'Debe completar el campo',
                   autofocus: true,

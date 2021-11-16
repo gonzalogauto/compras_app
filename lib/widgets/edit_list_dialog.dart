@@ -13,6 +13,7 @@ class EditListDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _nameController.text = listData.name ?? '';
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
@@ -53,7 +54,7 @@ class EditListDialog extends StatelessWidget {
                         ),
                       )),
                   ElevatedButton(
-                    style: ButtonStyle(
+                      style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                         Theme.of(context).colorScheme.secondary,
                       )),
