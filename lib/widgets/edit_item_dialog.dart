@@ -33,7 +33,6 @@ class EditItemDialog extends StatelessWidget {
               const SizedBox(height: 20),
               TextFormField(
                   controller: _nameController,
-                  initialValue: 'sadas',
                   validator: (value) =>
                       value != '' ? null : 'Debe completar el campo',
                   autofocus: true,
