@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DeleteListDialog extends StatelessWidget {
+  const DeleteListDialog({
+    Key? key,
+    required this.listData,
+  }) : super(key: key);
+
   final ShoppingListModel listData;
-  const DeleteListDialog({required this.listData, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +30,20 @@ class DeleteListDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text(
-                      'NO',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    )),
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'NO',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
                 ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                      Theme.of(context).colorScheme.secondary,
-                    )),
+                      backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
                     onPressed: () {
                       context
                           .read<ShoppingListCubit>()

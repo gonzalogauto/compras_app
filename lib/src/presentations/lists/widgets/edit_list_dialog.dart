@@ -7,8 +7,12 @@ import 'package:moor/moor.dart' as moor;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditListDialog extends StatelessWidget {
+  EditListDialog({
+    Key? key,
+    required this.listData,
+  }) : super(key: key);
+
   final ShoppingListModel listData;
-  EditListDialog({required this.listData, Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
 
@@ -31,48 +35,56 @@ class EditListDialog extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                  controller: _nameController,
-                  validator: (value) =>
-                      value != '' ? null : 'Debe completar el campo',
-                  autofocus: true,
-                  style: GoogleFonts.lato(fontSize: 17),
-                  decoration: const InputDecoration(
-                      labelText: 'Nombre', border: OutlineInputBorder())),
+                controller: _nameController,
+                validator: (value) =>
+                    value != '' ? null : 'Debe completar el campo',
+                autofocus: true,
+                style: GoogleFonts.lato(fontSize: 17),
+                decoration: const InputDecoration(
+                  labelText: 'Nombre',
+                  border: OutlineInputBorder(),
+                ),
+              ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
-                      onPressed: () {
+                    onPressed: () {
+                      _nameController.clear();
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'CANCELAR',
+                      style: GoogleFonts.lato(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        context.read<ShoppingListCubit>().updateList(
+                              ShoppingListTableCompanion(
+                                id: moor.Value(listData.id!),
+                                name: moor.Value(_nameController.text),
+                              ),
+                            );
                         _nameController.clear();
                         Navigator.pop(context);
-                      },
-                      child: Text(
-                        'CANCELAR',
-                        style: GoogleFonts.lato(
-                          fontSize: 12,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      )),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).colorScheme.secondary,
-                      )),
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          context.read<ShoppingListCubit>().updateList(
-                              ShoppingListTableCompanion(
-                                  id: moor.Value(listData.id!),
-                                  name: moor.Value(_nameController.text)));
-                          _nameController.clear();
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text(
-                        'GUARDAR',
-                        style: GoogleFonts.lato(fontSize: 12),
-                      ))
+                      }
+                    },
+                    child: Text(
+                      'GUARDAR',
+                      style: GoogleFonts.lato(fontSize: 12),
+                    ),
+                  )
                 ],
               )
             ],

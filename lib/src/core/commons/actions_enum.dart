@@ -1,1 +1,4 @@
-enum AppAction { edit, remove }
+enum AppAction {
+  edit,
+  remove,
+}

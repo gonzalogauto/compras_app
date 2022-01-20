@@ -29,42 +29,48 @@ class ListOfShoppingLists extends StatelessWidget {
             style: GoogleFonts.lato(fontWeight: FontWeight.w400),
           ),
           subtitle: Text(
-              DateFormat('dd/MM/yyyy').format(shoppingLists[index].createdAt!),
-              style: GoogleFonts.lato()),
+            DateFormat('dd/MM/yyyy').format(shoppingLists[index].createdAt!),
+            style: GoogleFonts.lato(),
+          ),
           trailing: PopupMenuButton<AppAction>(
-              onSelected: (item) async {
-                switch (item) {
-                  case AppAction.edit:
-                    return await showDialog(
-                        context: context,
-                        builder: (context) => EditListDialog(
-                              listData: shoppingLists[index],
-                            ));
-                  case AppAction.remove:
-                    return await showDialog(
-                        context: context,
-                        builder: (context) => DeleteListDialog(
-                              listData: shoppingLists[index],
-                            ));
-                  default:
-                }
-              },
-              itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      child: Text('Editar'),
-                      value: AppAction.edit,
+            onSelected: (item) async {
+              switch (item) {
+                case AppAction.edit:
+                  return await showDialog(
+                    context: context,
+                    builder: (context) => EditListDialog(
+                      listData: shoppingLists[index],
                     ),
-                    const PopupMenuItem(
-                      child: Text('Borrar'),
-                      value: AppAction.remove,
+                  );
+                case AppAction.remove:
+                  return await showDialog(
+                    context: context,
+                    builder: (context) => DeleteListDialog(
+                      listData: shoppingLists[index],
                     ),
-                  ]),
-          onTap: () {
-            Navigator.pushNamed(context, DetailPage.routeName,
-                arguments: ArgumentData(
-                    id: shoppingLists[index].id!,
-                    name: shoppingLists[index].name!));
-          },
+                  );
+                default:
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                child: Text('Editar'),
+                value: AppAction.edit,
+              ),
+              const PopupMenuItem(
+                child: Text('Borrar'),
+                value: AppAction.remove,
+              ),
+            ],
+          ),
+          onTap: () => Navigator.pushNamed(
+            context,
+            DetailPage.routeName,
+            arguments: ArgumentData(
+              id: shoppingLists[index].id!,
+              name: shoppingLists[index].name!,
+            ),
+          ),
         );
       },
     );

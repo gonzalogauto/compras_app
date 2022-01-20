@@ -5,8 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditItemDialog extends StatelessWidget {
+  EditItemDialog({
+    Key? key,
+    required this.itemData,
+  }) : super(key: key);
+
   final ItemModel itemData;
-  EditItemDialog({required this.itemData, Key? key}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
 
@@ -29,49 +33,53 @@ class EditItemDialog extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                  controller: _nameController,
-                  validator: (value) =>
-                      value != '' ? null : 'Debe completar el campo',
-                  autofocus: true,
-                  style: GoogleFonts.lato(fontSize: 17),
-                  decoration: const InputDecoration(
-                      labelText: 'Nombre', border: OutlineInputBorder())),
+                controller: _nameController,
+                validator: (value) =>
+                    value != '' ? null : 'Debe completar el campo',
+                autofocus: true,
+                style: GoogleFonts.lato(fontSize: 17),
+                decoration: const InputDecoration(
+                  labelText: 'Nombre',
+                  border: OutlineInputBorder(),
+                ),
+              ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
-                      onPressed: () {
+                    onPressed: () {
+                      _nameController.clear();
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'CANCELAR',
+                      style: GoogleFonts.lato(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        context.read<ItemsCubit>().updateItem(itemData.copyWith(
+                              description: _nameController.text,
+                            ));
                         _nameController.clear();
                         Navigator.pop(context);
-                      },
-                      child: Text(
-                        'CANCELAR',
-                        style: GoogleFonts.lato(
-                          fontSize: 12,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      )),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).colorScheme.secondary,
-                      )),
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          context
-                              .read<ItemsCubit>()
-                              .updateItem(itemData.copyWith(
-                                description: _nameController.text,
-                              ));
-                          _nameController.clear();
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text(
-                        'GUARDAR',
-                        style: GoogleFonts.lato(fontSize: 12),
-                      ))
+                      }
+                    },
+                    child: Text(
+                      'GUARDAR',
+                      style: GoogleFonts.lato(fontSize: 12),
+                    ),
+                  ),
                 ],
               )
             ],

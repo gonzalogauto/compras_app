@@ -28,20 +28,21 @@ class MyListsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
-          stream:
-              locator.get<AppDatabase>().shoppingListDao.watchShoppingList(),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<ShoppingListModel>> snapshot) {
-            if (snapshot.connectionState != ConnectionState.active) {
-              return const LoadingWidget();
-            } else if (snapshot.hasData) {
-              return snapshot.data!.isNotEmpty
-                  ? ListOfShoppingLists(shoppingLists: snapshot.data!)
-                  : const CustomEmptyWidget();
-            } else {
-              return const CustomErrorWidget();
-            }
-          }),
+        stream: locator.get<AppDatabase>().shoppingListDao.watchShoppingList(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<ShoppingListModel>> snapshot) {
+          if (snapshot.connectionState != ConnectionState.active) {
+            return const LoadingWidget();
+          } else if (snapshot.hasData) {
+            if (snapshot.data!.isEmpty) return const CustomEmptyWidget();
+            return ListOfShoppingLists(
+              shoppingLists: snapshot.data!,
+            );
+          } else {
+            return const CustomErrorWidget();
+          }
+        },
+      ),
     );
   }
 }

@@ -20,10 +20,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Mis Compras App',
-              style: GoogleFonts.lato(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontWeight: FontWeight.bold)),
+          title: Text(
+            'Mis Compras App',
+            style: GoogleFonts.lato(
+              color: Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           elevation: 0,
           centerTitle: true,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -33,10 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: index == 0
             ? FloatingActionButton(
                 shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+                  borderRadius: BorderRadius.circular(50),
+                ),
                 onPressed: () async {
                   final listName = await showDialog<String>(
-                      context: context, builder: (context) => AddListDialog());
+                    context: context,
+                    builder: (context) => AddListDialog(),
+                  );
                   if (listName != null) {
                     context.read<ShoppingListCubit>().createList(listName);
                   }
@@ -46,20 +52,23 @@ class _HomeScreenState extends State<HomeScreen> {
             : null,
         bottomNavigationBar: BottomNavigationBar(
           onTap: (newIndex) async {
-            await _pageController
-                .animateToPage(
-                  newIndex,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.decelerate,
-                )
-                .then((value) => setState(() => index = newIndex));
+            await _pageController.animateToPage(
+              newIndex,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.decelerate,
+            );
+            setState(() => index = newIndex);
           },
           currentIndex: index,
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(Icons.list_alt), label: 'Listas'),
+              icon: Icon(Icons.list_alt),
+              label: 'Listas',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Ajustes'),
+              icon: Icon(Icons.settings),
+              label: 'Ajustes',
+            ),
           ],
         ));
   }

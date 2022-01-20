@@ -7,7 +7,9 @@ class AddItemDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -22,33 +24,38 @@ class AddItemDialog extends StatelessWidget {
               controller: _textEditingController,
               autofocus: true,
               decoration: const InputDecoration(
-                  labelText: 'Nombre', border: OutlineInputBorder()),
+                labelText: 'Nombre',
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                    onPressed: () {
-                      _textEditingController.clear();
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'CANCELAR',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    )),
+                  onPressed: () {
+                    _textEditingController.clear();
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'CANCELAR',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
                 ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
                       Theme.of(context).colorScheme.secondary,
-                    )),
-                    onPressed: () {
-                      Navigator.pop(context, _textEditingController.text);
-                      _textEditingController.clear();
-                    },
-                    child: const Text('ACEPTAR'))
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context, _textEditingController.text);
+                    _textEditingController.clear();
+                  },
+                  child: const Text('ACEPTAR'),
+                ),
               ],
             )
           ],

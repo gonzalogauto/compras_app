@@ -14,8 +14,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
 class DetailPage extends StatelessWidget {
+  const DetailPage({
+    Key? key,
+    this.args,
+  }) : super(key: key);
+
   final ArgumentData? args;
-  const DetailPage({this.args, Key? key}) : super(key: key);
   static const routeName = '/detailPage';
 
   @override
@@ -30,7 +34,11 @@ class DetailPage extends StatelessWidget {
 }
 
 class DetailPageView extends StatelessWidget {
-  DetailPageView({Key? key, this.args}) : super(key: key);
+  DetailPageView({
+    Key? key,
+    this.args,
+  }) : super(key: key);
+
   final ArgumentData? args;
 
   final dao = locator.get<AppDatabase>().shoppingListDao;
@@ -57,42 +65,46 @@ class DetailPageView extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Theme.of(context).colorScheme.secondary,
         ),
-        title: Text(args.name,
-            style: GoogleFonts.lato(
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold)),
+        title: Text(
+          args.name,
+          style: GoogleFonts.lato(
+              color: Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.bold),
+        ),
         elevation: 0,
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: [
           IconButton(
-              onPressed: () => _share(
-                    args.name,
-                  ),
-              icon: Icon(
-                Icons.share,
-                color: Theme.of(context).colorScheme.secondary,
-              ))
+            onPressed: () => _share(
+              args.name,
+            ),
+            icon: Icon(
+              Icons.share,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
         ],
       ),
       body: StreamBuilder(
-          stream: dao.watchItemsFromShoppingList(args.id),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<ItemModel>> snapshot) {
-            if (snapshot.connectionState != ConnectionState.active) {
-              return const LoadingWidget();
-            } else if (snapshot.hasData) {
-              data.clear();
-              data.addAll(snapshot.data!);
-              if (snapshot.data!.isNotEmpty) {
-                return ItemsList(items: snapshot.data!);
-              } else {
-                return const CustomEmptyWidget();
-              }
+        stream: dao.watchItemsFromShoppingList(args.id),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<ItemModel>> snapshot) {
+          if (snapshot.connectionState != ConnectionState.active) {
+            return const LoadingWidget();
+          } else if (snapshot.hasData) {
+            data.clear();
+            data.addAll(snapshot.data!);
+            if (snapshot.data!.isNotEmpty) {
+              return ItemsList(items: snapshot.data!);
             } else {
-              return const CustomErrorWidget();
+              return const CustomEmptyWidget();
             }
-          }),
+          } else {
+            return const CustomErrorWidget();
+          }
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () async {

@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DeleteItemDialog extends StatelessWidget {
+  const DeleteItemDialog({
+    Key? key,
+    required this.itemData,
+  }) : super(key: key);
+
   final ItemModel itemData;
-  const DeleteItemDialog({required this.itemData, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +30,16 @@ class DeleteItemDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('NO')),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('NO'),
+                ),
                 ElevatedButton(
-                    onPressed: () {
-                      context.read<ItemsCubit>().deleteItem(itemData.id!);
-                      Navigator.pop(context);
-                    },
-                    child: const Text('SI'))
+                  onPressed: () {
+                    context.read<ItemsCubit>().deleteItem(itemData.id!);
+                    Navigator.pop(context);
+                  },
+                  child: const Text('SI'),
+                )
               ],
             )
           ],
