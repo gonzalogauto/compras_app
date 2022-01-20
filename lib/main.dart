@@ -1,23 +1,20 @@
-import 'package:compras_app/commons/preferences.dart';
-import 'package:compras_app/database/database.dart';
-import 'package:compras_app/screens/home.dart';
-import 'package:compras_app/screens/list_detail_page.dart';
-import 'package:compras_app/screens/settings.dart';
+import 'src/core/commons/argument_data.dart';
+import 'src/core/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bloc/items_bloc.dart';
-import 'bloc/shopping_list_bloc.dart';
-import 'cubit/theme_cubit.dart';
-import 'screens/my_lists.dart';
-import 'singletons/database_singleton.dart';
+import 'src/core/cubits/theme_cubit.dart';
+import 'src/core/singletons/database_singleton.dart';
+import 'src/presentations/detail/cubit/items_cubit.dart';
+import 'src/presentations/detail/screen/list_detail_page.dart';
+import 'src/presentations/home/screens/home.dart';
+import 'src/presentations/lists/cubit/shopping_list_cubit.dart';
+import 'src/presentations/settings/screen/settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  preferences = await SharedPreferences.getInstance();
-  DatabaseSingleton.database = AppDatabase();
+  await setUpDependencies();
   runApp(const MyApp());
 }
 
@@ -35,15 +32,22 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => ThemeCubit()),
-          BlocProvider(create: (context) => ShoppingListBloc()),
-          BlocProvider(create: (context) => ItemsBloc())
+          BlocProvider(create: (context) => ShoppingListCubit()),
+          BlocProvider(create: (context) => ItemsCubit())
         ],
-        child: BlocBuilder<ThemeCubit, ThemeData>(
+        child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (_, theme) {
+            final ThemeData themeData = ThemeData();
+            const appColor = Colors.blueGrey;
             return MaterialApp(
               title: 'Mis Compras App',
               debugShowCheckedModeBanner: false,
-              theme: theme,
+              theme: themeData.copyWith(
+                  colorScheme: themeData.colorScheme
+                      .copyWith(secondary: appColor, primary: appColor),
+                  toggleableActiveColor: appColor),
+              darkTheme: ThemeData.dark(),
+              themeMode: theme,
               onGenerateRoute: (settings) {
                 final arguments = settings.arguments as ArgumentData;
                 if (settings.name == '/') {
