@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../core/locator.dart';
 import '../../../core/widgets/empty_widget.dart';
 import '../../../core/widgets/error_widget.dart';
@@ -6,8 +9,6 @@ import '../../../data/datasource/database/database.dart';
 import '../../../data/models/shopping_list_model.dart';
 import '../cubit/shopping_list_cubit.dart';
 import '../widgets/shopping_list.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyListPage extends StatelessWidget {
   const MyListPage({Key? key}) : super(key: key);

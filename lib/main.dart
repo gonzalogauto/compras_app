@@ -1,10 +1,10 @@
-import 'src/core/commons/argument_data.dart';
-import 'src/core/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'src/core/commons/argument_data.dart';
 import 'src/core/cubits/theme_cubit.dart';
+import 'src/core/locator.dart';
 import 'src/core/singletons/database_singleton.dart';
 import 'src/presentations/detail/cubit/items_cubit.dart';
 import 'src/presentations/detail/screen/list_detail_page.dart';
