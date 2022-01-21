@@ -1,3 +1,4 @@
+import 'package:compras_app/src/presentations/home/cubit/page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => ThemeCubit()),
           BlocProvider(create: (context) => ShoppingListCubit()),
-          BlocProvider(create: (context) => ItemsCubit())
+          BlocProvider(create: (context) => ItemsCubit()),
+          BlocProvider(create: (context) => PageCubit())
         ],
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (_, theme) {
