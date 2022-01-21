@@ -12,6 +12,7 @@ import 'src/presentations/detail/screen/list_detail_page.dart';
 import 'src/presentations/home/screens/home.dart';
 import 'src/presentations/lists/cubit/shopping_list_cubit.dart';
 import 'src/presentations/settings/screen/settings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,21 +51,26 @@ class MyApp extends StatelessWidget {
                   toggleableActiveColor: appColor),
               darkTheme: ThemeData.dark(),
               themeMode: theme,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
               onGenerateRoute: (settings) {
                 final arguments = settings.arguments as ArgumentData;
                 if (settings.name == '/') {
                   return MaterialPageRoute(
-                      builder: (context) => const HomeScreen());
+                    builder: (context) => const HomeScreen(),
+                  );
                 }
                 if (settings.name == '/settings') {
                   return MaterialPageRoute(
-                      builder: (context) => const SettingsPage());
+                    builder: (context) => const SettingsPage(),
+                  );
                 }
                 if (settings.name == '/detail') {
                   return MaterialPageRoute(
-                      builder: (context) => DetailPage(
-                            args: arguments,
-                          ));
+                    builder: (context) => DetailPage(
+                      args: arguments,
+                    ),
+                  );
                 }
               },
               initialRoute: '/',
