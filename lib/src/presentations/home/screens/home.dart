@@ -24,10 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Mis Compras App',
-              style: GoogleFonts.lato(
+              'Mis listas app',
+              style: GoogleFonts.lora(
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
+                fontSize: 23,
               ),
             ),
             elevation: 0,
