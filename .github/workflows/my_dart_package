@@ -1,6 +1,6 @@
 # .github/workflows/my_dart_package.yaml
 name: my_dart_package
-on: pull_request
+on: push
 
 jobs:
   build:
