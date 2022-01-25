@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gdeveloper.compras_app">
    <application
-        android:label="compras_app"
+        android:label="Mis listas app"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
