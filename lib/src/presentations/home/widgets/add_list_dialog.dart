@@ -6,8 +6,11 @@ class AddListDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context).colorScheme;
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -21,9 +24,17 @@ class AddListDialog extends StatelessWidget {
             TextFormField(
               controller: _textEditingController,
               autofocus: true,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Nombre',
-                border: OutlineInputBorder(),
+                labelStyle: TextStyle(
+                  color: _theme.secondary,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: _theme.secondary,
+                  ),
+                ),
+                border: const OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
@@ -38,14 +49,14 @@ class AddListDialog extends StatelessWidget {
                   child: Text(
                     'CANCELAR',
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: _theme.secondary,
                     ),
                   ),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      Theme.of(context).colorScheme.secondary,
+                      _theme.secondary,
                     ),
                   ),
                   onPressed: () {

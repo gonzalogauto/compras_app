@@ -18,6 +18,7 @@ class EditListDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context).colorScheme;
     _nameController.text = listData.name ?? '';
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -40,9 +41,17 @@ class EditListDialog extends StatelessWidget {
                     value != '' ? null : 'Debe completar el campo',
                 autofocus: true,
                 style: GoogleFonts.lato(fontSize: 17),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Nombre',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: _theme.secondary,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: _theme.secondary,
+                    ),
+                  ),
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 20),

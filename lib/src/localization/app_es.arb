@@ -1,4 +1,10 @@
 {
+    "appName": "Mis listas app",
     "settings": "Ajustes",
-    "darkMode": "Tema oscuro"
+    "darkMode": "Tema oscuro",
+    "darkModeDetail": "Cambia el tema del sistema segun tu preferencia.",
+    "developer": "Creador",
+    "developedBy": "Desarrollado por Gonzalo Gauto",
+    "edit":"Editar",
+    "delete":"Borrar"
 }

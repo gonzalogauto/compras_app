@@ -6,6 +6,7 @@ class AddItemDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context).colorScheme;
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -23,9 +24,17 @@ class AddItemDialog extends StatelessWidget {
             TextFormField(
               controller: _textEditingController,
               autofocus: true,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Nombre',
-                border: OutlineInputBorder(),
+                labelStyle: TextStyle(
+                  color: _theme.secondary,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: _theme.secondary,
+                  ),
+                ),
+                border: const OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),

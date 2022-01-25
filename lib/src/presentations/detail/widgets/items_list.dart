@@ -4,6 +4,7 @@ import '../cubit/items_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'delete_item_dialog.dart';
 import 'edit_item_dialog.dart';
@@ -20,6 +21,8 @@ class ItemsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: items.length,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       itemBuilder: (context, index) {
         return Card(
           elevation: 0,
@@ -63,12 +66,12 @@ class ItemsList extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
-                const PopupMenuItem(
-                  child: Text('Editar'),
+                PopupMenuItem(
+                  child: Text(AppLocalizations.of(context)!.edit),
                   value: AppAction.edit,
                 ),
-                const PopupMenuItem(
-                  child: Text('Borrar'),
+                PopupMenuItem(
+                  child: Text(AppLocalizations.of(context)!.delete),
                   value: AppAction.remove,
                 ),
               ],

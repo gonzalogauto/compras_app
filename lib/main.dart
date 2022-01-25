@@ -46,9 +46,12 @@ class MyApp extends StatelessWidget {
               title: 'Mis Compras App',
               debugShowCheckedModeBanner: false,
               theme: themeData.copyWith(
-                  colorScheme: themeData.colorScheme
-                      .copyWith(secondary: appColor, primary: appColor),
-                  toggleableActiveColor: appColor),
+                colorScheme: themeData.colorScheme.copyWith(
+                  secondary: appColor,
+                  primary: appColor,
+                ),
+                toggleableActiveColor: appColor,
+              ),
               darkTheme: ThemeData.dark(),
               themeMode: theme,
               localizationsDelegates: AppLocalizations.localizationsDelegates,

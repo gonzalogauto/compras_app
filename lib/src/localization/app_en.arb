@@ -1,4 +1,10 @@
 {
+    "appName": "My lists app",
     "settings": "Settings",
-    "darkMode": "Dark Mode"
+    "darkMode": "Dark Mode",
+    "darkModeDetail": "Change the system theme according to your preference.",
+    "developer": "Developer",
+    "developedBy": "Developer by Gonzalo Gauto",
+    "edit":"Edit",
+    "delete":"Delete"
 }

@@ -16,6 +16,7 @@ class EditItemDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context).colorScheme;
     _nameController.text = itemData.description ?? '';
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -38,9 +39,17 @@ class EditItemDialog extends StatelessWidget {
                     value != '' ? null : 'Debe completar el campo',
                 autofocus: true,
                 style: GoogleFonts.lato(fontSize: 17),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Nombre',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: _theme.secondary,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: _theme.secondary,
+                    ),
+                  ),
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 20),

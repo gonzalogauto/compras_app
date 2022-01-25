@@ -21,7 +21,7 @@ class SettingsPage extends StatelessWidget {
                 style: GoogleFonts.lato(),
               ),
               subtitle: Text(
-                'Cambia el tema del sistema segun tu preferencia.',
+                AppLocalizations.of(context)!.darkModeDetail,
                 style: GoogleFonts.lato(),
               ),
               onChanged: (isPressed) {
@@ -32,11 +32,11 @@ class SettingsPage extends StatelessWidget {
         ),
         ListTile(
           title: Text(
-            'Creador',
+            AppLocalizations.of(context)!.developer,
             style: GoogleFonts.lato(),
           ),
           subtitle: Text(
-            'Desarrollado por Gonzalo Gauto.',
+            AppLocalizations.of(context)!.developedBy,
             style: GoogleFonts.lato(),
           ),
         )

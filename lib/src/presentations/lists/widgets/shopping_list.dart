@@ -5,6 +5,7 @@ import '../../detail/screen/list_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'delete_list_dialog.dart';
 import 'edit_list_dialog.dart';
@@ -21,6 +22,7 @@ class ListOfShoppingLists extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: shoppingLists.length,
+      physics: const BouncingScrollPhysics(),
       separatorBuilder: (context, index) => const Divider(),
       padding: const EdgeInsets.all(8),
       itemBuilder: (context, index) {
@@ -56,12 +58,12 @@ class ListOfShoppingLists extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
-                const PopupMenuItem(
-                  child: Text('Editar'),
+                PopupMenuItem(
+                  child: Text(AppLocalizations.of(context)!.edit),
                   value: AppAction.edit,
                 ),
-                const PopupMenuItem(
-                  child: Text('Borrar'),
+                PopupMenuItem(
+                  child: Text(AppLocalizations.of(context)!.delete),
                   value: AppAction.remove,
                 ),
               ],

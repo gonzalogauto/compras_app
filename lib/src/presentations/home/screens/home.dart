@@ -6,6 +6,7 @@ import '../widgets/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Mis listas app',
+              AppLocalizations.of(context)!.appName,
               style: GoogleFonts.lora(
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
