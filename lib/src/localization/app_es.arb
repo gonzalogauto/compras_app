@@ -6,5 +6,19 @@
     "developer": "Creador",
     "developedBy": "Desarrollado por Gonzalo Gauto",
     "edit":"Editar",
-    "delete":"Borrar"
+    "delete":"Borrar",
+    "newItem":"Nuevo item",
+    "newList":"Nueva lista",
+    "name":"Nombre",
+    "cancel":"Cancelar",
+    "accept":"Aceptar",
+    "doYouWhatToDeleteThisItem":"¿Desea borrar el item?",
+    "yes":"Si",
+    "no":"No",
+    "insertTheNewNameOfTheItem":"Ingrese el nuevo nombre del item",
+    "insertTheNewNameOfTheList":"Insert the new name of the list",
+    "save":"Guardar",
+    "youMustCompleteThisField":"Debe completar el campo",
+    "anErrorHasOcurred":"Ha ocurrido un error.",
+    "noData":"Sin datos"
 }

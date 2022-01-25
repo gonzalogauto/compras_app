@@ -3,6 +3,7 @@ import '../cubit/items_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditItemDialog extends StatelessWidget {
   EditItemDialog({
@@ -28,19 +29,20 @@ class EditItemDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Ingrese el nuevo nombre del item',
+                AppLocalizations.of(context)!.insertTheNewNameOfTheItem,
                 style: GoogleFonts.lato(fontSize: 17),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _nameController,
-                validator: (value) =>
-                    value != '' ? null : 'Debe completar el campo',
+                validator: (value) => value != ''
+                    ? null
+                    : AppLocalizations.of(context)!.youMustCompleteThisField,
                 autofocus: true,
                 style: GoogleFonts.lato(fontSize: 17),
                 decoration: InputDecoration(
-                  labelText: 'Nombre',
+                  labelText: AppLocalizations.of(context)!.name,
                   labelStyle: TextStyle(
                     color: _theme.secondary,
                   ),
@@ -62,7 +64,7 @@ class EditItemDialog extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      'CANCELAR',
+                      AppLocalizations.of(context)!.cancel.toUpperCase(),
                       style: GoogleFonts.lato(
                         fontSize: 12,
                         color: Theme.of(context).colorScheme.secondary,
@@ -85,7 +87,7 @@ class EditItemDialog extends StatelessWidget {
                       }
                     },
                     child: Text(
-                      'GUARDAR',
+                      AppLocalizations.of(context)!.save.toUpperCase(),
                       style: GoogleFonts.lato(fontSize: 12),
                     ),
                   ),

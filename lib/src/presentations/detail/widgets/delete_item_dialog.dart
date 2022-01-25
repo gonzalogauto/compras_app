@@ -2,6 +2,7 @@ import '../../../data/models/item_model.dart';
 import '../cubit/items_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeleteItemDialog extends StatelessWidget {
   const DeleteItemDialog({
@@ -20,9 +21,9 @@ class DeleteItemDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              '¿Desea borrar el item?',
-              style: TextStyle(fontSize: 20),
+            Text(
+              AppLocalizations.of(context)!.doYouWhatToDeleteThisItem,
+              style: const TextStyle(fontSize: 20),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
@@ -32,7 +33,7 @@ class DeleteItemDialog extends StatelessWidget {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    'NO',
+                    AppLocalizations.of(context)!.no.toUpperCase(),
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary),
                   ),
@@ -47,7 +48,7 @@ class DeleteItemDialog extends StatelessWidget {
                     context.read<ItemsCubit>().deleteItem(itemData.id!);
                     Navigator.pop(context);
                   },
-                  child: const Text('SI'),
+                  child: Text(AppLocalizations.of(context)!.yes.toUpperCase()),
                 )
               ],
             )

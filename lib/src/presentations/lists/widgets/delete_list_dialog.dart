@@ -2,6 +2,7 @@ import '../../../data/models/shopping_list_model.dart';
 import '../cubit/shopping_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeleteListDialog extends StatelessWidget {
   const DeleteListDialog({
@@ -32,7 +33,7 @@ class DeleteListDialog extends StatelessWidget {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    'NO',
+                    AppLocalizations.of(context)!.no.toUpperCase(),
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
@@ -50,7 +51,8 @@ class DeleteListDialog extends StatelessWidget {
                           .deleteList(listData.id!);
                       Navigator.pop(context);
                     },
-                    child: const Text('SI'))
+                    child:
+                        Text(AppLocalizations.of(context)!.yes.toUpperCase()))
               ],
             )
           ],

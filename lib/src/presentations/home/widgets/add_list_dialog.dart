@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddListDialog extends StatelessWidget {
   AddListDialog({Key? key}) : super(key: key);
@@ -16,16 +17,16 @@ class AddListDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Nueva lista de compras',
-              style: TextStyle(fontSize: 20),
+            Text(
+              AppLocalizations.of(context)!.newList,
+              style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 20),
             TextFormField(
               controller: _textEditingController,
               autofocus: true,
               decoration: InputDecoration(
-                labelText: 'Nombre',
+                labelText: AppLocalizations.of(context)!.name,
                 labelStyle: TextStyle(
                   color: _theme.secondary,
                 ),
@@ -47,7 +48,7 @@ class AddListDialog extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'CANCELAR',
+                    AppLocalizations.of(context)!.cancel.toUpperCase(),
                     style: TextStyle(
                       color: _theme.secondary,
                     ),
@@ -63,7 +64,8 @@ class AddListDialog extends StatelessWidget {
                     Navigator.pop(context, _textEditingController.text);
                     _textEditingController.clear();
                   },
-                  child: const Text('ACEPTAR'),
+                  child:
+                      Text(AppLocalizations.of(context)!.accept.toUpperCase()),
                 )
               ],
             )
