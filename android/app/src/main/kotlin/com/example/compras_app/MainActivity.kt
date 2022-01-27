@@ -1,4 +1,4 @@
-package com.gdeveloper.compras_app
+package com.gdeveloper.mis_listas_app
 
 import io.flutter.embedding.android.FlutterActivity
 
