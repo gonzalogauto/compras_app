@@ -69,14 +69,14 @@ class EditListDialog extends StatelessWidget {
                       AppLocalizations.of(context)!.cancel.toUpperCase(),
                       style: GoogleFonts.lato(
                         fontSize: 12,
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: _theme.secondary,
                       ),
                     ),
                   ),
                   ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).colorScheme.secondary,
+                        _theme.secondary,
                       ),
                     ),
                     onPressed: () {
@@ -93,7 +93,10 @@ class EditListDialog extends StatelessWidget {
                     },
                     child: Text(
                       AppLocalizations.of(context)!.save.toUpperCase(),
-                      style: GoogleFonts.lato(fontSize: 12),
+                      style: GoogleFonts.lato(
+                        fontSize: 12,
+                        color: _theme.onSecondary,
+                      ),
                     ),
                   )
                 ],

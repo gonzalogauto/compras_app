@@ -20,10 +20,11 @@ class ItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: items.length,
+      itemCount: items.length + 1,
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       itemBuilder: (context, index) {
+        if (index == (items.length)) return const SizedBox(height: 80);
         return Card(
           elevation: 0,
           child: ListTile(

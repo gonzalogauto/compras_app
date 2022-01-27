@@ -14,6 +14,7 @@ class DeleteListDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context).colorScheme;
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
@@ -22,7 +23,7 @@ class DeleteListDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '¿Desea borrar la lista "${listData.name!}"?',
+              AppLocalizations.of(context)!.doYouWhatToDeleteThisList,
               style: const TextStyle(fontSize: 20),
               textAlign: TextAlign.center,
             ),
@@ -35,14 +36,14 @@ class DeleteListDialog extends StatelessWidget {
                   child: Text(
                     AppLocalizations.of(context)!.no.toUpperCase(),
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: _theme.secondary,
                     ),
                   ),
                 ),
                 ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).colorScheme.secondary,
+                        _theme.secondary,
                       ),
                     ),
                     onPressed: () {
@@ -51,8 +52,10 @@ class DeleteListDialog extends StatelessWidget {
                           .deleteList(listData.id!);
                       Navigator.pop(context);
                     },
-                    child:
-                        Text(AppLocalizations.of(context)!.yes.toUpperCase()))
+                    child: Text(
+                      AppLocalizations.of(context)!.yes.toUpperCase(),
+                      style: TextStyle(color: _theme.onSecondary),
+                    ))
               ],
             )
           ],

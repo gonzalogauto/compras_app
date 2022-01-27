@@ -88,7 +88,10 @@ class EditItemDialog extends StatelessWidget {
                     },
                     child: Text(
                       AppLocalizations.of(context)!.save.toUpperCase(),
-                      style: GoogleFonts.lato(fontSize: 12),
+                      style: GoogleFonts.lato(
+                        fontSize: 12,
+                        color: _theme.onSecondary,
+                      ),
                     ),
                   ),
                 ],

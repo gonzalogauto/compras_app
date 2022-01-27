@@ -64,8 +64,10 @@ class AddListDialog extends StatelessWidget {
                     Navigator.pop(context, _textEditingController.text);
                     _textEditingController.clear();
                   },
-                  child:
-                      Text(AppLocalizations.of(context)!.accept.toUpperCase()),
+                  child: Text(
+                    AppLocalizations.of(context)!.accept.toUpperCase(),
+                    style: TextStyle(color: _theme.onSecondary),
+                  ),
                 )
               ],
             )

@@ -14,8 +14,11 @@ class DeleteItemDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context).colorScheme;
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -34,21 +37,23 @@ class DeleteItemDialog extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     AppLocalizations.of(context)!.no.toUpperCase(),
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary),
+                    style: TextStyle(color: _theme.secondary),
                   ),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      Theme.of(context).colorScheme.secondary,
+                      _theme.secondary,
                     ),
                   ),
                   onPressed: () {
                     context.read<ItemsCubit>().deleteItem(itemData.id!);
                     Navigator.pop(context);
                   },
-                  child: Text(AppLocalizations.of(context)!.yes.toUpperCase()),
+                  child: Text(
+                    AppLocalizations.of(context)!.yes.toUpperCase(),
+                    style: TextStyle(color: _theme.onSecondary),
+                  ),
                 )
               ],
             )
