@@ -1,6 +1,7 @@
 {
     "appName": "Mis listas app",
     "settings": "Ajustes",
+    "lists":"Listas",
     "darkMode": "Tema oscuro",
     "darkModeDetail": "Cambia el tema del sistema segun tu preferencia.",
     "developer": "Creador",
