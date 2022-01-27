@@ -7,7 +7,17 @@ class CustomEmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(AppLocalizations.of(context)!.noData),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.find_in_page,
+            size: 45,
+          ),
+          const SizedBox(height: 10),
+          Text(AppLocalizations.of(context)!.noData)
+        ],
+      ),
     );
   }
 }
