@@ -1,14 +1,19 @@
 import 'package:compras_app/src/core/widgets/empty_widget.dart';
 import 'package:compras_app/src/core/widgets/error_widget.dart';
 import 'package:compras_app/src/core/widgets/loading_widget.dart';
+import 'package:compras_app/src/data/datasource/database/database.dart';
 import 'package:compras_app/src/data/models/item_model.dart';
 import 'package:compras_app/src/presentations/detail/widgets/items_list.dart';
 import 'package:compras_app/src/presentations/home/widgets/new_list_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
+  setUpAll(() {
+    GetIt.instance.registerSingleton<AppDatabase>(AppDatabase());
+  });
   testWidgets('Test LoadingWidget', (WidgetTester tester) async {
     await tester.pumpWidget(const LoadingWidget());
 
