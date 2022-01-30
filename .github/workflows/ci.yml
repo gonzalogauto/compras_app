@@ -7,14 +7,15 @@ on:
       - master
 
 jobs:
-  verify-dart:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@main
+#   verify-dart:
+#     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@main
 
   verify-flutter:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@main
 
   build:
-    needs: [verify-dart, verify-flutter]
+    needs: [verify-flutter]
+#     needs: [verify-dart, verify-flutter]
 
     runs-on: ubuntu-latest
 
