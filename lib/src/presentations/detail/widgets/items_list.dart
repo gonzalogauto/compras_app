@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../../core/commons/actions_enum.dart';
 import '../../../data/models/item_model.dart';
 import '../cubit/items_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'delete_item_dialog.dart';
 import 'edit_item_dialog.dart';
@@ -29,7 +30,7 @@ class ItemsList extends StatelessWidget {
           elevation: 0,
           child: ListTile(
             leading: Checkbox(
-              side: BorderSide(color: Colors.grey.shade500, width: 1),
+              side: BorderSide(color: Colors.grey.shade500),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -50,30 +51,29 @@ class ItemsList extends StatelessWidget {
               onSelected: (item) async {
                 switch (item) {
                   case AppAction.edit:
-                    return await showDialog(
+                    return showDialog(
                       context: context,
                       builder: (context) => EditItemDialog(
                         itemData: items[index],
                       ),
                     );
                   case AppAction.remove:
-                    return await showDialog(
+                    return showDialog(
                       context: context,
                       builder: (context) => DeleteItemDialog(
                         itemData: items[index],
                       ),
                     );
-                  default:
                 }
               },
               itemBuilder: (context) => [
                 PopupMenuItem(
-                  child: Text(AppLocalizations.of(context)!.edit),
                   value: AppAction.edit,
+                  child: Text(AppLocalizations.of(context)!.edit),
                 ),
                 PopupMenuItem(
-                  child: Text(AppLocalizations.of(context)!.delete),
                   value: AppAction.remove,
+                  child: Text(AppLocalizations.of(context)!.delete),
                 ),
               ],
             ),

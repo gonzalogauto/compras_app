@@ -1,4 +1,4 @@
-import 'package:compras_app/src/presentations/lists/cubit/shopping_list_cubit.dart';
+import '../../lists/cubit/shopping_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,7 @@ class NewListButton extends StatelessWidget {
           builder: (context) => AddListDialog(),
         );
         if (listName != null) {
-          context.read<ShoppingListCubit>().createList(listName);
+          await context.read<ShoppingListCubit>().createList(listName);
         }
       },
       child: const Icon(Icons.add),

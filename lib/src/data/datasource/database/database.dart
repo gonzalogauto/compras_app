@@ -13,21 +13,26 @@ part 'database.g.dart';
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase()
-      : super(FlutterQueryExecutor.inDatabaseFolder(
-            path: 'db.sqlite', logStatements: true));
+      : super(
+          FlutterQueryExecutor.inDatabaseFolder(
+            path: 'db.sqlite',
+            logStatements: true,
+          ),
+        );
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 1;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-      onCreate: (Migrator m) => m.createAll(),
-      onUpgrade: (m, from, to) async {
-        if (from <= 1) {
-          await m.alterTable(TableMigration(shoppingListTable));
-        }
-        if (from <= 2) {
-          await m.alterTable(TableMigration(itemTable));
-        }
-      });
+        onCreate: (Migrator m) => m.createAll(),
+        // onUpgrade: (m, from, to) async {
+        //   if (from <= 1) {
+        //     await m.alterTable(TableMigration(shoppingListTable));
+        //   }
+        //   if (from <= 2) {
+        //     await m.alterTable(TableMigration(itemTable));
+        //   }
+        // },
+      );
 }

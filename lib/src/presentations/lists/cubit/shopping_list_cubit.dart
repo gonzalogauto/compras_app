@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:moor/moor.dart' as moor;
+import 'package:moor/moor.dart';
+
 import '../../../core/commons/status_enum.dart';
 import '../../../core/locator.dart';
 import '../../../data/datasource/database/DAO/shopping_list_dao.dart';
 import '../../../data/datasource/database/database.dart';
 import '../../../domain/entities/shopping_list.dart';
-import 'package:moor/moor.dart' as moor;
-import 'package:moor/moor.dart';
 
 part 'shopping_list_state.dart';
 
@@ -21,8 +22,12 @@ class ShoppingListCubit extends Cubit<ShoppingListState> {
   }
 
   Future<void> createList(String name) async {
-    await dao.insertShoppingList(ShoppingListTableCompanion(
-        name: moor.Value(name), createdAt: moor.Value(DateTime.now())));
+    await dao.insertShoppingList(
+      ShoppingListTableCompanion(
+        name: moor.Value(name),
+        createdAt: moor.Value(DateTime.now()),
+      ),
+    );
     final data = await dao.getShoppingList();
     emit(state.copyWith(status: Status.loaded, data: data));
   }

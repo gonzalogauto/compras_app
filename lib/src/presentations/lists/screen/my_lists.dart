@@ -30,8 +30,10 @@ class MyListsPage extends StatelessWidget {
     return Scaffold(
       body: StreamBuilder(
         stream: locator.get<AppDatabase>().shoppingListDao.watchShoppingList(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<ShoppingListModel>> snapshot) {
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<List<ShoppingListModel>> snapshot,
+        ) {
           if (snapshot.connectionState != ConnectionState.active) {
             return const LoadingWidget();
           } else if (snapshot.hasData) {

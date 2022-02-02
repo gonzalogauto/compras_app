@@ -1,8 +1,9 @@
-import '../../../data/models/shopping_list_model.dart';
-import '../cubit/shopping_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../data/models/shopping_list_model.dart';
+import '../cubit/shopping_list_cubit.dart';
 
 class DeleteListDialog extends StatelessWidget {
   const DeleteListDialog({
@@ -18,7 +19,7 @@ class DeleteListDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -41,21 +42,20 @@ class DeleteListDialog extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        _theme.secondary,
-                      ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      _theme.secondary,
                     ),
-                    onPressed: () {
-                      context
-                          .read<ShoppingListCubit>()
-                          .deleteList(listData.id!);
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.yes.toUpperCase(),
-                      style: TextStyle(color: _theme.onSecondary),
-                    ))
+                  ),
+                  onPressed: () {
+                    context.read<ShoppingListCubit>().deleteList(listData.id!);
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    AppLocalizations.of(context)!.yes.toUpperCase(),
+                    style: TextStyle(color: _theme.onSecondary),
+                  ),
+                )
               ],
             )
           ],

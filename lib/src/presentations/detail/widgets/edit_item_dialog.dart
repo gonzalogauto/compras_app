@@ -1,9 +1,10 @@
-import '../../../data/models/item_model.dart';
-import '../cubit/items_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../data/models/item_model.dart';
+import '../cubit/items_cubit.dart';
 
 class EditItemDialog extends StatelessWidget {
   EditItemDialog({
@@ -22,7 +23,7 @@ class EditItemDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15),
         child: Form(
           key: _formKey,
           child: Column(
@@ -79,9 +80,11 @@ class EditItemDialog extends StatelessWidget {
                     ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
-                        context.read<ItemsCubit>().updateItem(itemData.copyWith(
-                              description: _nameController.text,
-                            ));
+                        context.read<ItemsCubit>().updateItem(
+                              itemData.copyWith(
+                                description: _nameController.text,
+                              ),
+                            );
                         _nameController.clear();
                         Navigator.pop(context);
                       }

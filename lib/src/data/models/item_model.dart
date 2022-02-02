@@ -8,11 +8,12 @@ class ItemModel extends Item {
     num? unitPrice,
     bool? isChecked,
   }) : super(
-            id: id,
-            description: description,
-            quantity: quantity,
-            unitPrice: unitPrice,
-            isChecked: isChecked);
+          id: id,
+          description: description,
+          quantity: quantity,
+          unitPrice: unitPrice,
+          isChecked: isChecked,
+        );
 
   @override
   ItemModel copyWith({

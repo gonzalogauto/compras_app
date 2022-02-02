@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Item test', () {
-    final Item item = Item(id: 1);
+    final item = Item(id: 1);
     expect(item.id, 1);
     expect(item.description, null);
     final newItem = item.copyWith(description: 'test');
@@ -14,7 +14,7 @@ void main() {
   });
 
   test('ItemModel test', () {
-    final ItemModel itemModel = ItemModel(id: 1);
+    final itemModel = ItemModel(id: 1);
     expect(itemModel.id, 1);
     expect(itemModel.description, null);
     final newItemModel = itemModel.copyWith(description: 'test');
@@ -22,7 +22,7 @@ void main() {
   });
 
   test('ShoppingList test', () {
-    final ShoppingList shoppingList = ShoppingList(
+    final shoppingList = ShoppingList(
       id: 1,
       name: 'test',
       items: [],
@@ -34,7 +34,7 @@ void main() {
     expect(newShoppintList.name, 'test1');
   });
   test('ShoppingListModel test', () {
-    final ShoppingListModel shoppingListModel = ShoppingListModel(id: 1);
+    final shoppingListModel = ShoppingListModel(id: 1);
     expect(shoppingListModel.id, 1);
     expect(shoppingListModel.name, null);
     final newShoppintListModel = shoppingListModel.copyWith(name: 'test');

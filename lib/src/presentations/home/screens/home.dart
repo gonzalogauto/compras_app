@@ -1,6 +1,6 @@
-import 'package:compras_app/src/presentations/home/cubit/page_cubit.dart';
-import 'package:compras_app/src/presentations/home/widgets/home_navigation_bar.dart';
-import 'package:compras_app/src/presentations/home/widgets/new_list_button.dart';
+import '../cubit/page_cubit.dart';
+import '../widgets/home_navigation_bar.dart';
+import '../widgets/new_list_button.dart';
 
 import '../widgets/home_body.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +12,10 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
 
   @override

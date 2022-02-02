@@ -10,12 +10,11 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (context, state) {
             return SwitchListTile(
-              value: state == ThemeMode.dark ? true : false,
+              value: state == ThemeMode.dark,
               title: Text(
                 AppLocalizations.of(context)!.darkMode,
                 style: GoogleFonts.lato(),
