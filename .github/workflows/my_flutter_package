@@ -1,4 +1,4 @@
-name: Flutter Package Workflow
+name: Flutter Workflow
 
 on:
   workflow_call:
