@@ -11,7 +11,7 @@ jobs:
 #     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@main
 
   verify-flutter:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@main
+    uses: Gonzaa25/compras_app/.github/workflows/my_flutter_package.yml@main
 
   build:
     needs: [verify-flutter]
