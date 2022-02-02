@@ -1,4 +1,4 @@
-# compras_app
+# Mis listas app
 
 A new Flutter app.
 
