@@ -14,7 +14,6 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
-      allowImplicitScrolling: false,
       controller: pageController,
       children: const [
         MyListPage(),

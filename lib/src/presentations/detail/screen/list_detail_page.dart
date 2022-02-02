@@ -47,7 +47,7 @@ class DetailPageView extends StatelessWidget {
 
   Future<void> _share(String listName) async {
     var text = '*$listName*:\n';
-    for (var item in data) {
+    for (final item in data) {
       if (item.isChecked!) {
         text += '• ~${item.description}~.\n';
       } else {
@@ -59,7 +59,7 @@ class DetailPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as ArgumentData;
+    final args = ModalRoute.of(context)!.settings.arguments as ArgumentData?;
 
     return Scaffold(
       appBar: AppBar(
@@ -67,10 +67,11 @@ class DetailPageView extends StatelessWidget {
           color: Theme.of(context).colorScheme.secondary,
         ),
         title: Text(
-          args.name,
+          args!.name,
           style: GoogleFonts.lato(
-              color: Theme.of(context).colorScheme.secondary,
-              fontWeight: FontWeight.bold),
+            color: Theme.of(context).colorScheme.secondary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         elevation: 0,
         centerTitle: true,
@@ -94,8 +95,9 @@ class DetailPageView extends StatelessWidget {
           if (snapshot.connectionState != ConnectionState.active) {
             return const LoadingWidget();
           } else if (snapshot.hasData) {
-            data.clear();
-            data.addAll(snapshot.data!);
+            data
+              ..clear()
+              ..addAll(snapshot.data!);
             if (snapshot.data!.isNotEmpty) {
               return ItemsList(items: snapshot.data!);
             } else {

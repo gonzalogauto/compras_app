@@ -1,10 +1,10 @@
-import '../tables/item.dart';
-import '../tables/shopping_list.dart';
-import '../../../models/item_model.dart';
-import '../../../models/shopping_list_model.dart';
 import 'package:moor/moor.dart';
 
+import '../../../models/item_model.dart';
+import '../../../models/shopping_list_model.dart';
 import '../database.dart';
+import '../tables/item.dart';
+import '../tables/shopping_list.dart';
 
 part 'shopping_list_dao.g.dart';
 
@@ -16,11 +16,14 @@ class ShoppingListDao extends DatabaseAccessor<AppDatabase>
   Future<List<ShoppingListModel>> getShoppingList() async {
     final result = await select(shoppingListTable).get();
     return result
-        .map((e) => ShoppingListModel(
+        .map(
+          (e) => ShoppingListModel(
             id: e.id,
-            createdAt: e.createdAt!,
+            createdAt: e.createdAt,
             name: e.name ?? 'sin nombre',
-            items: []))
+            items: [],
+          ),
+        )
         .toList();
   }
 
@@ -34,24 +37,38 @@ class ShoppingListDao extends DatabaseAccessor<AppDatabase>
     final result = await (select(shoppingListTable)
           ..where((u) => u.id.equals(listId)))
         .getSingle();
-    return await delete(shoppingListTable).delete(result);
+    return delete(shoppingListTable).delete(result);
   }
 
   Stream<List<ShoppingListModel>> watchShoppingList() {
-    return select(shoppingListTable).watch().map((event) => event
-        .map((e) =>
-            ShoppingListModel(id: e.id, createdAt: e.createdAt, name: e.name))
-        .toList());
+    return select(shoppingListTable).watch().map(
+          (event) => event
+              .map(
+                (e) => ShoppingListModel(
+                  id: e.id,
+                  createdAt: e.createdAt,
+                  name: e.name,
+                ),
+              )
+              .toList(),
+        );
   }
 
   Stream<List<ItemModel>> watchItemsFromShoppingList(int listId) {
     return (select(itemTable)
           ..where((tbl) => tbl.shoppingListId.equals(listId)))
         .watch()
-        .map((event) => event
-            .map((e) => ItemModel(
-                id: e.id, description: e.name, isChecked: e.isChecked))
-            .toList());
+        .map(
+          (event) => event
+              .map(
+                (e) => ItemModel(
+                  id: e.id,
+                  description: e.name,
+                  isChecked: e.isChecked,
+                ),
+              )
+              .toList(),
+        );
   }
 
   Future insertItem(Insertable<ItemTableData> item) {
@@ -65,7 +82,7 @@ class ShoppingListDao extends DatabaseAccessor<AppDatabase>
   Future<int> deleteItem(int itemId) async {
     final result = await (select(itemTable)..where((u) => u.id.equals(itemId)))
         .getSingle();
-    return await delete(itemTable).delete(result);
+    return delete(itemTable).delete(result);
   }
 
   Future insertShoppingList(Insertable<ShoppingListTableData> shopppingList) {

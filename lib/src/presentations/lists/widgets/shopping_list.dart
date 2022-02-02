@@ -41,30 +41,29 @@ class ListOfShoppingLists extends StatelessWidget {
               onSelected: (item) async {
                 switch (item) {
                   case AppAction.edit:
-                    return await showDialog(
+                    return showDialog(
                       context: context,
                       builder: (context) => EditListDialog(
                         listData: shoppingLists[index],
                       ),
                     );
                   case AppAction.remove:
-                    return await showDialog(
+                    return showDialog(
                       context: context,
                       builder: (context) => DeleteListDialog(
                         listData: shoppingLists[index],
                       ),
                     );
-                  default:
                 }
               },
               itemBuilder: (context) => [
                 PopupMenuItem(
-                  child: Text(AppLocalizations.of(context)!.edit),
                   value: AppAction.edit,
+                  child: Text(AppLocalizations.of(context)!.edit),
                 ),
                 PopupMenuItem(
-                  child: Text(AppLocalizations.of(context)!.delete),
                   value: AppAction.remove,
+                  child: Text(AppLocalizations.of(context)!.delete),
                 ),
               ],
             ),

@@ -1,20 +1,20 @@
-import 'package:compras_app/src/presentations/home/cubit/page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 import 'src/core/commons/argument_data.dart';
 import 'src/core/cubits/theme_cubit.dart';
 import 'src/core/locator.dart';
 import 'src/core/singletons/database_singleton.dart';
+
 import 'src/presentations/detail/cubit/items_cubit.dart';
 import 'src/presentations/detail/screen/list_detail_page.dart';
+import 'src/presentations/home/cubit/page_cubit.dart';
 import 'src/presentations/home/screens/home.dart';
 import 'src/presentations/lists/cubit/shopping_list_cubit.dart';
 import 'src/presentations/settings/screen/settings.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setUpDependencies();
   runApp(const MyApp());
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ],
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (_, theme) {
-            final ThemeData themeData = ThemeData();
+            final themeData = ThemeData();
             const appColor = Colors.blueGrey;
             return MaterialApp(
               title: 'Mis Compras App',
@@ -57,19 +57,19 @@ class MyApp extends StatelessWidget {
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               onGenerateRoute: (settings) {
-                final arguments = settings.arguments as ArgumentData;
+                final arguments = settings.arguments as ArgumentData?;
                 if (settings.name == '/') {
-                  return MaterialPageRoute(
+                  return MaterialPageRoute<HomeScreen>(
                     builder: (context) => const HomeScreen(),
                   );
                 }
                 if (settings.name == '/settings') {
-                  return MaterialPageRoute(
+                  return MaterialPageRoute<SettingsPage>(
                     builder: (context) => const SettingsPage(),
                   );
                 }
                 if (settings.name == '/detail') {
-                  return MaterialPageRoute(
+                  return MaterialPageRoute<DetailPage>(
                     builder: (context) => DetailPage(
                       args: arguments,
                     ),

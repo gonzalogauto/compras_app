@@ -7,9 +7,10 @@ import '../locator.dart';
 class ThemeCubit extends Cubit<ThemeMode> {
   ThemeCubit()
       : super(
-            locator.get<SharedPreferences>().getBool('use_dark_theme') ?? false
-                ? ThemeMode.dark
-                : ThemeMode.light);
+          locator.get<SharedPreferences>().getBool('use_dark_theme') ?? false
+              ? ThemeMode.dark
+              : ThemeMode.light,
+        );
 
   Future<void> changeTheme() async {
     state == ThemeMode.light

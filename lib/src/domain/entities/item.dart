@@ -1,9 +1,4 @@
 class Item {
-  final int? id;
-  final String? description;
-  final num? quantity;
-  final num? unitPrice;
-  final bool? isChecked;
   Item({
     this.id,
     this.description,
@@ -12,9 +7,16 @@ class Item {
     this.isChecked,
   });
 
+  final int? id;
+  final String? description;
+  final num? quantity;
+  final num? unitPrice;
+  final bool? isChecked;
+
   @override
   String toString() {
-    return 'Item(id: $id, description: $description, quantity: $quantity, unit_price: $unitPrice)';
+    return 'Item(id: $id, description: $description, quantity: $quantity'
+        ', unit_price: $unitPrice)';
   }
 
   Item copyWith({

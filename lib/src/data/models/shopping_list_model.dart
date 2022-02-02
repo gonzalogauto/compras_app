@@ -1,5 +1,5 @@
-import '../../domain/entities/shopping_list.dart';
 import '../../domain/entities/item.dart';
+import '../../domain/entities/shopping_list.dart';
 
 class ShoppingListModel extends ShoppingList {
   ShoppingListModel({
@@ -15,8 +15,12 @@ class ShoppingListModel extends ShoppingList {
         );
 
   @override
-  ShoppingListModel copyWith(
-      {int? id, DateTime? createdAt, String? name, List<Item>? items}) {
+  ShoppingListModel copyWith({
+    int? id,
+    DateTime? createdAt,
+    String? name,
+    List<Item>? items,
+  }) {
     return ShoppingListModel(
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
