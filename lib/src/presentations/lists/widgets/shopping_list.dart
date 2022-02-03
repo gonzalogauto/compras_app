@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+
 import '../../../core/commons/actions_enum.dart';
 import '../../../core/commons/argument_data.dart';
 import '../../../data/models/shopping_list_model.dart';
 import '../../detail/screen/list_detail_page.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'delete_list_dialog.dart';
 import 'edit_list_dialog.dart';
 
