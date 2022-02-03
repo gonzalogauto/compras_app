@@ -5,6 +5,4 @@ linter:
   rules:
     public_member_api_docs: false
     always_use_package_imports: false
-    implicit_dynamic_type: false
     use_build_context_synchronously: false
-    sort_pub_dependencies: false
