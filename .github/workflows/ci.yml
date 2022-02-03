@@ -7,14 +7,11 @@ on:
       - master
 
 jobs:
-  verify-dart:
-    uses: Gonzaa25/compras_app/.github/workflows/my_dart_package.yml@master
-
   verify-flutter:
     uses: Gonzaa25/compras_app/.github/workflows/my_flutter_package.yml@master
 
   build:
-    needs: [verify-dart, verify-flutter]
+    needs: [verify-flutter]
 
     runs-on: ubuntu-latest
 
