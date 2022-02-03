@@ -1,0 +1,55 @@
+name: Dart Package Workflow
+
+on:
+  workflow_call:
+    inputs:
+      coverage_excludes:
+        required: false
+        type: string
+        default: ""
+      dart_sdk:
+        required: false
+        type: string
+        default: "stable"
+      working_directory:
+        required: false
+        type: string
+        default: "."
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ${{inputs.working_directory}}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v2
+
+      - name: 🎯 Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{inputs.dart_sdk}}
+
+      - name: 📦 Install Dependencies
+        run: dart pub get
+
+      - name: ✨ Check Formatting
+        run: dart format --set-exit-if-changed .
+
+      - name: 🕵️ Analyze
+        run: dart analyze --fatal-infos --fatal-warnings lib
+
+      - name: 🧪 Run Tests
+        run: |
+          pub global activate test_coverage
+          export PATH=$PATH:$HOME/.pub-cache/bin
+          test_coverage
+      - name: 📊 Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
+        with:
+          path: ${{inputs.working_directory}}/coverage/lcov.info
+          min_coverage: 05
+          exclude: ${{inputs.coverage_excludes}}
