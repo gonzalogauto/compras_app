@@ -1,5 +1,5 @@
 [![](https://img.shields.io/github/license/Gonzaa25/compras_app)](https://github.com/Gonzaa25/compras_app/blob/master/LICENSE.md)
-[![](https://img.shields.io/github/workflow/status/Gonzaa25/compras_app/ci)](https://github.com/Gonzaa25/compras_app/blob/master)
+[![compras_app](https://img.shields.io/github/workflow/status/Gonzaa25/compras_app/ci)](https://github.com/Gonzaa25/compras_app/blob/master)
 
 # My lists app
 
