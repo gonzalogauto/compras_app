@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:compras_app/src/core/commons/status_enum.dart';
+import 'package:compras_app/src/core/locator.dart';
+import 'package:compras_app/src/data/datasource/database/DAO/shopping_list_dao.dart';
+import 'package:compras_app/src/data/datasource/database/database.dart';
+import 'package:compras_app/src/domain/entities/shopping_list.dart';
 import 'package:moor/moor.dart' as moor;
 import 'package:moor/moor.dart';
-
-import '../../../core/commons/status_enum.dart';
-import '../../../core/locator.dart';
-import '../../../data/datasource/database/DAO/shopping_list_dao.dart';
-import '../../../data/datasource/database/database.dart';
-import '../../../domain/entities/shopping_list.dart';
 
 part 'shopping_list_state.dart';
 

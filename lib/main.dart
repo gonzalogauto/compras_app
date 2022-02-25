@@ -1,18 +1,17 @@
+import 'package:compras_app/src/core/commons/argument_data.dart';
+import 'package:compras_app/src/core/cubits/theme_cubit.dart';
+import 'package:compras_app/src/core/locator.dart';
+import 'package:compras_app/src/core/singletons/database_singleton.dart';
+import 'package:compras_app/src/presentations/detail/cubit/items_cubit.dart';
+import 'package:compras_app/src/presentations/detail/screen/list_detail_page.dart';
+import 'package:compras_app/src/presentations/home/cubit/page_cubit.dart';
+import 'package:compras_app/src/presentations/home/screens/home.dart';
+import 'package:compras_app/src/presentations/lists/cubit/shopping_list_cubit.dart';
+import 'package:compras_app/src/presentations/settings/screen/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'src/core/commons/argument_data.dart';
-import 'src/core/cubits/theme_cubit.dart';
-import 'src/core/locator.dart';
-import 'src/core/singletons/database_singleton.dart';
-
-import 'src/presentations/detail/cubit/items_cubit.dart';
-import 'src/presentations/detail/screen/list_detail_page.dart';
-import 'src/presentations/home/cubit/page_cubit.dart';
-import 'src/presentations/home/screens/home.dart';
-import 'src/presentations/lists/cubit/shopping_list_cubit.dart';
-import 'src/presentations/settings/screen/settings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +74,7 @@ class MyApp extends StatelessWidget {
                     ),
                   );
                 }
+                return null;
               },
               initialRoute: '/',
               routes: {

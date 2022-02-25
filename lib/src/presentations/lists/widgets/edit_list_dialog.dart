@@ -1,12 +1,11 @@
+import 'package:compras_app/src/data/datasource/database/database.dart';
+import 'package:compras_app/src/data/models/shopping_list_model.dart';
+import 'package:compras_app/src/presentations/lists/cubit/shopping_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moor/moor.dart' as moor;
-
-import '../../../data/datasource/database/database.dart';
-import '../../../data/models/shopping_list_model.dart';
-import '../cubit/shopping_list_cubit.dart';
 
 class EditListDialog extends StatelessWidget {
   EditListDialog({

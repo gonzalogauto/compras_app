@@ -1,8 +1,7 @@
+import 'package:compras_app/src/data/datasource/database/DAO/shopping_list_dao.dart';
+import 'package:compras_app/src/data/datasource/database/tables/item.dart';
+import 'package:compras_app/src/data/datasource/database/tables/shopping_list.dart';
 import 'package:moor_flutter/moor_flutter.dart';
-
-import 'DAO/shopping_list_dao.dart';
-import 'tables/item.dart';
-import 'tables/shopping_list.dart';
 
 part 'database.g.dart';
 

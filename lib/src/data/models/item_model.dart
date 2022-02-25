@@ -1,4 +1,4 @@
-import '../../domain/entities/item.dart';
+import 'package:compras_app/src/domain/entities/item.dart';
 
 class ItemModel extends Item {
   ItemModel({

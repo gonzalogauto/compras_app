@@ -1,18 +1,17 @@
+import 'package:compras_app/src/core/commons/argument_data.dart';
+import 'package:compras_app/src/core/locator.dart';
+import 'package:compras_app/src/core/widgets/empty_widget.dart';
+import 'package:compras_app/src/core/widgets/error_widget.dart';
+import 'package:compras_app/src/core/widgets/loading_widget.dart';
+import 'package:compras_app/src/data/datasource/database/database.dart';
+import 'package:compras_app/src/data/models/item_model.dart';
+import 'package:compras_app/src/presentations/detail/cubit/items_cubit.dart';
+import 'package:compras_app/src/presentations/detail/widgets/add_item_dialog.dart';
+import 'package:compras_app/src/presentations/detail/widgets/items_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
-
-import '../../../core/commons/argument_data.dart';
-import '../../../core/locator.dart';
-import '../../../core/widgets/empty_widget.dart';
-import '../../../core/widgets/error_widget.dart';
-import '../../../core/widgets/loading_widget.dart';
-import '../../../data/datasource/database/database.dart';
-import '../../../data/models/item_model.dart';
-import '../cubit/items_cubit.dart';
-import '../widgets/add_item_dialog.dart';
-import '../widgets/items_list.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({

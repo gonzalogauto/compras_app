@@ -1,4 +1,4 @@
-import '../../data/datasource/database/database.dart';
+import 'package:compras_app/src/data/datasource/database/database.dart';
 
 class DatabaseSingleton {
   factory DatabaseSingleton() {

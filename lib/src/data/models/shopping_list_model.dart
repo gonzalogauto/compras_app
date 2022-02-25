@@ -1,5 +1,5 @@
-import '../../domain/entities/item.dart';
-import '../../domain/entities/shopping_list.dart';
+import 'package:compras_app/src/domain/entities/item.dart';
+import 'package:compras_app/src/domain/entities/shopping_list.dart';
 
 class ShoppingListModel extends ShoppingList {
   ShoppingListModel({

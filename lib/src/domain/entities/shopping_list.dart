@@ -1,4 +1,4 @@
-import 'item.dart';
+import 'package:compras_app/src/domain/entities/item.dart';
 
 class ShoppingList {
   ShoppingList({

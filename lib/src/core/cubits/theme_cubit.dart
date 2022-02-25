@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:compras_app/src/core/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../locator.dart';
 
 class ThemeCubit extends Cubit<ThemeMode> {
   ThemeCubit()

@@ -1,7 +1,6 @@
+import 'package:compras_app/src/presentations/lists/screen/my_lists.dart';
+import 'package:compras_app/src/presentations/settings/screen/settings.dart';
 import 'package:flutter/material.dart';
-
-import '../../lists/screen/my_lists.dart';
-import '../../settings/screen/settings.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({

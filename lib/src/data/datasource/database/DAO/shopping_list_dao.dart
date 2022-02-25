@@ -1,10 +1,9 @@
+import 'package:compras_app/src/data/datasource/database/database.dart';
+import 'package:compras_app/src/data/datasource/database/tables/item.dart';
+import 'package:compras_app/src/data/datasource/database/tables/shopping_list.dart';
+import 'package:compras_app/src/data/models/item_model.dart';
+import 'package:compras_app/src/data/models/shopping_list_model.dart';
 import 'package:moor/moor.dart';
-
-import '../../../models/item_model.dart';
-import '../../../models/shopping_list_model.dart';
-import '../database.dart';
-import '../tables/item.dart';
-import '../tables/shopping_list.dart';
 
 part 'shopping_list_dao.g.dart';
 

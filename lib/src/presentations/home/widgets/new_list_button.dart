@@ -1,8 +1,7 @@
+import 'package:compras_app/src/presentations/home/widgets/add_list_dialog.dart';
+import 'package:compras_app/src/presentations/lists/cubit/shopping_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../lists/cubit/shopping_list_cubit.dart';
-import 'add_list_dialog.dart';
 
 class NewListButton extends StatelessWidget {
   const NewListButton({
