@@ -49,3 +49,6 @@ app.*.map.json
 genhtml.perl
 
 /coverage/*
+
+# exclude fvm folder
+.fvm
