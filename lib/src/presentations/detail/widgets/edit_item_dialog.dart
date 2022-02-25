@@ -1,10 +1,9 @@
+import 'package:compras_app/src/data/models/item_model.dart';
+import 'package:compras_app/src/presentations/detail/cubit/items_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../data/models/item_model.dart';
-import '../cubit/items_cubit.dart';
 
 class EditItemDialog extends StatelessWidget {
   EditItemDialog({

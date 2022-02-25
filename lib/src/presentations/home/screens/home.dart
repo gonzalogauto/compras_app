@@ -1,11 +1,11 @@
+import 'package:compras_app/src/presentations/home/cubit/page_cubit.dart';
+import 'package:compras_app/src/presentations/home/widgets/home_body.dart';
+import 'package:compras_app/src/presentations/home/widgets/home_navigation_bar.dart';
+import 'package:compras_app/src/presentations/home/widgets/new_list_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../cubit/page_cubit.dart';
-import '../widgets/home_body.dart';
-import '../widgets/home_navigation_bar.dart';
-import '../widgets/new_list_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
